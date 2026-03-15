@@ -244,25 +244,52 @@ Ce questionnaire doit être posé au client **avant** de commencer le développe
 
 ---
 
-## Section 8 : Budget et planning (5 questions)
+## Section 8 : Niveau d'infrastructure et disponibilité (4 questions)
 
-### Q53. Quel est votre budget pour ce projet ?
+### Q53. Combien de visiteurs attendez-vous par jour ?
+- **Contexte** : Détermine le dimensionnement serveur et le niveau de haute disponibilité
+- **Exemple** : "Moins de 100", "100-1000", "1000-10000", "Plus de 10000"
+
+### Q54. Quelle tolérance avez-vous aux interruptions de service ?
+- **Contexte** : Permet de choisir entre un VPS simple ou une architecture multi-serveurs
+- **Guide pour l'agent** :
+  - **Niveau 1 - Essentiel (1 VPS)** : Le site peut être indisponible quelques minutes en cas de maintenance ou incident. Budget infra : 5 000-15 000 FCFA/mois. Convient pour les petites boutiques démarrant leur activité.
+  - **Niveau 2 - Professionnel (1 VPS optimisé)** : PM2 cluster (2+ instances), backups automatiques, monitoring, swap, PostgreSQL tuné, certificats SSL, rate limiting. Downtime max : quelques minutes par mois. Budget infra : 15 000-40 000 FCFA/mois. C'est le standard pour un e-commerce sérieux sur un seul serveur.
+  - **Niveau 3 - Haute disponibilité (multi-serveurs)** : Load balancer, 2+ serveurs applicatifs, base de données répliquée (primary/replica), Redis Sentinel, CDN (Cloudflare), monitoring avancé (Prometheus+Grafana), alertes automatiques. Downtime max : quelques secondes par an. Budget infra : 80 000-200 000 FCFA/mois.
+  - **Niveau 4 - Mission critique (cloud managé)** : Kubernetes ou cloud managé (AWS/GCP/Azure), auto-scaling, multi-régions, failover automatique, WAF, DDoS protection, 99.99% uptime garanti. Budget infra : 200 000+ FCFA/mois.
+- **Exemple** : "Le site doit toujours être en ligne" → Niveau 3, "C'est OK si il y a une coupure de 5 min de temps en temps" → Niveau 2
+
+### Q55. Votre boutique gère-t-elle des paiements en ligne ?
+- **Contexte** : Un site avec paiement nécessite minimum le Niveau 2 (sécurité, backups, SSL, monitoring)
+- **Exemple** : "Oui, Orange Money + Wave" → Minimum Niveau 2 obligatoire
+
+### Q56. Avez-vous des exigences réglementaires ou de conformité ?
+- **Contexte** : RGPD, données bancaires, certification PCI-DSS
+- **Exemple** : "Non", "Oui, RGPD pour les clients européens"
+
+> **IMPORTANT pour l'agent IA** : Après ces questions, consulter le fichier `02-ARCHITECTURE/niveaux-disponibilite.md` pour choisir le bon niveau et adapter l'architecture en conséquence. Ne jamais déployer un e-commerce avec paiement en dessous du Niveau 2.
+
+---
+
+## Section 9 : Budget et planning (5 questions)
+
+### Q57. Quel est votre budget pour ce projet ?
 - **Contexte** : Permet de calibrer les fonctionnalités et de prioriser le MVP
 - **Exemple** : "500 000 FCFA", "1 000 000 FCFA", "Flexible selon les fonctionnalités"
 
-### Q54. Quelle est votre date de lancement souhaitée ?
+### Q58. Quelle est votre date de lancement souhaitée ?
 - **Contexte** : Permet de planifier les sprints et de définir le MVP vs les phases suivantes
 - **Exemple** : "Dans 3 semaines", "Pour la rentrée", "Pas de deadline stricte"
 
-### Q55. Préférez-vous un lancement en une fois ou par phases ?
+### Q59. Préférez-vous un lancement en une fois ou par phases ?
 - **Contexte** : Le lancement par phases réduit les risques et permet un retour rapide
 - **Exemple** : "Par phases : MVP d'abord, puis les extras", "Tout d'un coup"
 
-### Q56. Qui sont les décideurs pour la validation du projet ?
+### Q60. Qui sont les décideurs pour la validation du projet ?
 - **Contexte** : Evite les allers-retours avec des personnes non identifiées
 - **Exemple** : "Moi seul", "Moi et mon associé", "Le directeur marketing doit valider"
 
-### Q57. Avez-vous d'autres projets ou besoins connexes ?
+### Q61. Avez-vous d'autres projets ou besoins connexes ?
 - **Contexte** : Application mobile, intégration ERP, site vitrine séparé
 - **Exemple** : "Une application mobile plus tard", "Non, juste le site"
 

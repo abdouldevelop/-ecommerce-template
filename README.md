@@ -29,9 +29,11 @@ Chaque fichier est conçu pour être **immédiatement utilisable** par un agent 
 
 ### Etape 2 : Architecture (02-ARCHITECTURE)
 
-1. Confirmer ou adapter la stack dans `stack-technique.md`
-2. Adapter le schéma de base de données dans `schema-base-donnees.md`
-3. Référencer les endpoints API dans `api-endpoints.md`
+1. **IMPORTANT** : Consulter `niveaux-disponibilite.md` pour choisir le bon niveau d'infrastructure (1 à 4) selon le budget et les besoins du client
+2. Confirmer ou adapter la stack dans `stack-technique.md`
+3. Adapter le schéma de base de données dans `schema-base-donnees.md`
+4. Référencer les endpoints API dans `api-endpoints.md`
+5. Si Niveau 3+, suivre le guide `haute-disponibilite.md`
 
 ### Etape 3 : Répartition des tâches (03-EQUIPES)
 
