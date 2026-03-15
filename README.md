@@ -67,6 +67,17 @@ Chaque fichier de `04-FONCTIONNALITES/` est une spécification fonctionnelle com
 2. Effectuer l'audit de sécurité avec `securite-audit.md`
 3. Rédiger la documentation client avec `documentation-client.md`
 
+### Etape 7 : Automatisation Claude Code (07-CLAUDE-CODE)
+
+1. Configurer le `CLAUDE.md` du projet en partant de `claude-md-template.md`
+2. Copier `settings-template.json` dans `.claude/settings.json` du projet cible
+3. Suivre le `guide-automatisation.md` pour lancer la generation automatisee en 5 phases :
+   - Phase 1 : Setup (CLAUDE.md + .env + structure)
+   - Phase 2 : Generation backend avec builds incrementaux
+   - Phase 3 : Generation frontend avec builds incrementaux
+   - Phase 4 : Verification automatique + auto-fix + retry
+   - Phase 5 : Deploiement
+
 ## Structure du répertoire
 
 ```
@@ -105,10 +116,15 @@ ecommerce-template/
 │   ├── journal-decisions.md               # Log des décisions
 │   └── changelog.md                       # Historique des versions
 │
-└── 06-LIVRAISON/                          # Mise en production
-    ├── checklist-production.md            # 50+ vérifications avant go-live
-    ├── securite-audit.md                  # Audit sécurité complet
-    └── documentation-client.md            # Documentation de remise client
+├── 06-LIVRAISON/                          # Mise en production
+│   ├── checklist-production.md            # 50+ vérifications avant go-live
+│   ├── securite-audit.md                  # Audit sécurité complet
+│   └── documentation-client.md            # Documentation de remise client
+│
+└── 07-CLAUDE-CODE/                        # Automatisation Claude Code
+    ├── guide-automatisation.md            # Guide complet (CLI, hooks, patterns, tokens, erreurs)
+    ├── claude-md-template.md              # Template CLAUDE.md pour projets générés
+    └── settings-template.json             # Configuration .claude/settings.json
 ```
 
 ## Conventions

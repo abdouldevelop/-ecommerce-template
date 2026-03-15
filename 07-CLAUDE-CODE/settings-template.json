@@ -1,0 +1,90 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Grep",
+      "Glob",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git status *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git checkout *)",
+      "Bash(ls *)",
+      "Bash(mkdir *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(docker compose *)",
+      "Bash(docker build *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(chmod 777 *)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | bash)"
+    ]
+  },
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // empty'); PROTECTED=('.env' '.env.local' 'secrets.json' 'private_key.pem'); for p in \"${PROTECTED[@]}\"; do if [[ \"$FILE\" == *\"$p\"* ]]; then echo \"BLOQUE : $FILE est protege\" >&2; exit 2; fi; done; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path'); if [[ \"$FILE\" == *schema.prisma* ]]; then cd $(dirname \"$FILE\")/.. && npx prisma generate 2>&1 | tail -3; fi"
+          },
+          {
+            "type": "command",
+            "command": "jq -c '{timestamp: now|todate, tool: .tool_name, file: .tool_input.file_path}' >> .claude/audit.log 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Rappel post-compaction : Lire .claude/CLAUDE.md pour les conventions. Verifier npm run build apres chaque modification majeure.'"
+          }
+        ]
+      }
+    ]
+  },
+
+  "fileSuggestionExcludes": [
+    "node_modules/**",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    ".next/**",
+    "coverage/**",
+    "*.log",
+    ".env*"
+  ],
+
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

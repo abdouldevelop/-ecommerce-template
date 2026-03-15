@@ -206,6 +206,23 @@ Ce kanban est pré-rempli avec toutes les tâches des fichiers `equipe-*.md`. Me
 | INFRA-020 | Opti Nginx | P1 | S | - |
 | INFRA-021 | Opti Node.js | P1 | S | - |
 
+### Sprint 8 : Automatisation Claude Code (P1)
+
+| ID | Tâche | Priorité | Complexité | Assigné |
+|---|---|---|---|---|
+| AUTO-001 | Configurer CLAUDE.md du projet | P1 | S | - |
+| AUTO-002 | Configurer .claude/settings.json (permissions, hooks) | P1 | S | - |
+| AUTO-003 | Creer scripts d'automatisation Phase 1 (setup) | P1 | M | - |
+| AUTO-004 | Creer scripts d'automatisation Phase 2 (backend) | P1 | L | - |
+| AUTO-005 | Creer scripts d'automatisation Phase 3 (frontend) | P1 | L | - |
+| AUTO-006 | Creer scripts d'automatisation Phase 4 (verify + auto-fix) | P1 | M | - |
+| AUTO-007 | Creer scripts d'automatisation Phase 5 (deploy) | P1 | M | - |
+| AUTO-008 | Configurer hooks PreToolUse (protection fichiers sensibles) | P1 | S | - |
+| AUTO-009 | Configurer hooks PostToolUse (auto-format, prisma generate) | P1 | S | - |
+| AUTO-010 | Configurer hook SessionStart (contexte post-compaction) | P1 | S | - |
+| AUTO-011 | Tester le pipeline complet sur un projet test | P1 | XL | - |
+| AUTO-012 | Documenter les couts reels par phase | P1 | S | - |
+
 ---
 
 ## EN COURS (en développement actif)
@@ -236,13 +253,13 @@ Ce kanban est pré-rempli avec toutes les tâches des fichiers `equipe-*.md`. Me
 
 | Métrique | Valeur |
 |---|---|
-| **Total tâches** | 141 |
+| **Total tâches** | 153 |
 | **P0 (MVP)** | 75 |
-| **P1 (Important)** | 54 |
+| **P1 (Important)** | 66 |
 | **P2 (Souhaitable)** | 12 |
 | **Estimation P0** | ~200h |
-| **Estimation P0+P1** | ~332h |
-| **BACKLOG** | 141 |
+| **Estimation P0+P1** | ~356h |
+| **BACKLOG** | 153 |
 | **TODO** | 0 |
 | **EN COURS** | 0 |
 | **REVIEW** | 0 |
@@ -257,7 +274,8 @@ Ce kanban est pré-rempli avec toutes les tâches des fichiers `equipe-*.md`. Me
 | Frontend | 38 | ~98h |
 | Infrastructure | 21 | ~54h |
 | Securite | 69 points d'audit | - |
-| **Tests** | **52** | **~132h** |
+| Tests | 52 | ~132h |
+| **Automatisation Claude Code** | **12** | **~24h** |
 
 ---
 
