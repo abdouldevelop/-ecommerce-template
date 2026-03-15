@@ -112,8 +112,8 @@ ecommerce/
 │       │   └── search.store.ts   # Zustand search store
 │       ├── types/
 │       │   └── index.ts          # Types TypeScript
-│       ├── next.config.ts
-│       ├── tailwind.config.ts
+│       ├── next.config.js          # IMPORTANT: .js pas .ts
+│       ├── tailwind.config.js      # IMPORTANT: .js pas .ts
 │       ├── tsconfig.json
 │       └── package.json
 │
@@ -360,6 +360,83 @@ npm run start              # Lance en mode production
 npm run lint               # Vérifie le code
 npm run format             # Formate le code
 ```
+
+---
+
+## Contraintes de deploiement automatise
+
+### Fichiers de configuration : `.js` obligatoire (pas `.ts`)
+
+Les fichiers de configuration suivants **doivent** etre en `.js` avec `module.exports` :
+
+| Fichier | Format correct | Format interdit |
+|---|---|---|
+| `next.config.js` | `module.exports = { ... }` | `next.config.ts` (non supporte Next.js 14) |
+| `tailwind.config.js` | `module.exports = { ... }` | `tailwind.config.ts` |
+| `postcss.config.js` | `module.exports = { ... }` | `postcss.config.ts` |
+
+**Pourquoi** : Next.js 14 ne supporte pas nativement les fichiers de configuration en TypeScript. L'utilisation de `.ts` provoque des erreurs de build silencieuses ou des echecs de compilation.
+
+### Prisma : generation du client avant le build
+
+L'ordre d'execution est **critique** :
+
+```bash
+# 1. Installer les dependances
+npm install
+
+# 2. S'assurer que .env est accessible depuis le dossier du schema Prisma
+cp .env apps/api/prisma/.env  # ou creer un lien symbolique
+
+# 3. Generer le client Prisma AVANT tout build
+cd apps/api && npx prisma generate
+
+# 4. Seulement apres : build du backend
+npx nest build  # ou npm run build
+
+# 5. Verifier que le build a produit des fichiers
+ls dist/main.js  # DOIT exister, sinon le build a echoue silencieusement
+```
+
+**Erreur frequente** : Si `npx prisma generate` n'est pas execute, le build TypeScript echoue avec ~56 erreurs `Cannot find module '@prisma/client'`.
+
+### Verification du build NestJS
+
+`nest build` peut terminer avec exit code 0 mais produire un dossier `dist/` vide. Toujours verifier :
+
+```bash
+# Verification obligatoire apres nest build
+if [ ! -f "dist/main.js" ]; then
+  echo "ERREUR: Build NestJS echoue — dist/main.js absent"
+  exit 1
+fi
+```
+
+### Fichier `.env` et Prisma
+
+Le fichier `.env` contenant `DATABASE_URL` doit etre accessible depuis le repertoire ou se trouve `schema.prisma`. Deux strategies :
+
+1. **Copie** : `cp .env apps/api/prisma/.env`
+2. **Variable d'environnement** : `DATABASE_URL=... npx prisma migrate deploy`
+
+### Compatibilite Node.js
+
+| Composant | Version minimum | Recommandee |
+|---|---|---|
+| Node.js | 18.x | 20.x LTS |
+| npm | 9.x | 10.x |
+| npx | 9.x | 10.x |
+
+**Note** : Prisma 6+ requiert Node.js 18.18 minimum. NestJS 10+ requiert Node.js 18+.
+
+### Methodologie de build incrementale
+
+Pour eviter les erreurs en cascade lors d'une generation automatisee :
+
+1. Creer le schema Prisma + `npx prisma generate` + verifier
+2. Creer les modules backend un par un + `nest build` apres chaque module
+3. Creer les pages frontend une par une + `npm run build` apres chaque page
+4. Test d'integration a la fin
 
 ---
 
