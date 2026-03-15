@@ -30,6 +30,11 @@ Ce kanban est pré-rempli avec toutes les tâches des fichiers `equipe-*.md`. Me
 | INFRA-018 | CI GitHub Actions | P2 | L | - |
 | INFRA-019 | CD automatique | P2 | L | - |
 
+### Tests de charge P2
+| ID | Tâche | Priorité | Complexité | Assigné |
+|---|---|---|---|---|
+| TEST-045 | Charge - Pool DB | P2 | M | - |
+
 ---
 
 ## TODO (planifié, prêt à démarrer)
@@ -116,6 +121,67 @@ Ce kanban est pré-rempli avec toutes les tâches des fichiers `equipe-*.md`. Me
 | FE-034 | Page contact | P1 | S | - |
 | FE-035 | Page 404 | P1 | S | - |
 
+### Sprint 6 : Tests unitaires et E2E (P0)
+
+| ID | Tâche | Priorité | Complexité | Assigné |
+|---|---|---|---|---|
+| TEST-001 | Setup tests backend | P0 | M | - |
+| TEST-002 | Auth - Inscription | P0 | M | - |
+| TEST-003 | Auth - Connexion | P0 | M | - |
+| TEST-004 | Auth - Token Refresh | P0 | M | - |
+| TEST-005 | Auth - Logout/Password | P0 | S | - |
+| TEST-006 | JWT Guards | P0 | M | - |
+| TEST-007 | Products - Lecture | P0 | M | - |
+| TEST-008 | Products - Ecriture | P0 | L | - |
+| TEST-009 | Orders - Creation | P0 | XL | - |
+| TEST-010 | Orders - Gestion | P0 | M | - |
+| TEST-011 | Payments - Initiation | P0 | L | - |
+| TEST-012 | Payments - Callback | P0 | L | - |
+| TEST-019 | Setup tests frontend | P0 | M | - |
+| TEST-020 | Composants UI de base | P0 | M | - |
+| TEST-021 | ProductCard | P0 | M | - |
+| TEST-026 | Store Auth | P0 | M | - |
+| TEST-027 | Store Cart | P0 | M | - |
+| TEST-029 | Client Axios | P0 | M | - |
+| TEST-031 | Setup Playwright | P0 | M | - |
+| TEST-032 | E2E - Auth | P0 | M | - |
+| TEST-033 | E2E - Produits | P0 | L | - |
+| TEST-034 | E2E - Panier | P0 | M | - |
+| TEST-035 | E2E - Checkout | P0 | XL | - |
+| TEST-036 | E2E - Paiement | P0 | L | - |
+| TEST-047 | Injection SQL | P0 | M | - |
+| TEST-048 | XSS | P0 | M | - |
+| TEST-049 | Auth bypass | P0 | L | - |
+
+### Sprint 7 : Tests complementaires (P1)
+
+| ID | Tâche | Priorité | Complexité | Assigné |
+|---|---|---|---|---|
+| TEST-013 | Categories | P1 | M | - |
+| TEST-014 | Cart | P1 | M | - |
+| TEST-015 | Addresses | P1 | S | - |
+| TEST-016 | Users | P1 | S | - |
+| TEST-017 | Settings | P1 | S | - |
+| TEST-018 | Dashboard | P1 | M | - |
+| TEST-022 | Header | P1 | M | - |
+| TEST-023 | Pages Auth | P1 | M | - |
+| TEST-024 | Pages Produits | P1 | L | - |
+| TEST-025 | Panier | P1 | M | - |
+| TEST-028 | Store Search | P1 | S | - |
+| TEST-030 | Fonctions utilitaires | P1 | S | - |
+| TEST-037 | E2E - Admin Produits | P1 | XL | - |
+| TEST-038 | E2E - Admin Commandes | P1 | L | - |
+| TEST-039 | E2E - Admin Categories | P1 | M | - |
+| TEST-040 | E2E - Mobile responsive | P1 | L | - |
+| TEST-041 | Setup k6 | P1 | S | - |
+| TEST-042 | Charge - Page d'accueil | P1 | M | - |
+| TEST-043 | Charge - API | P1 | M | - |
+| TEST-044 | Stress - Checkout | P1 | L | - |
+| TEST-046 | Scan OWASP ZAP | P1 | L | - |
+| TEST-050 | Rate limiting | P1 | M | - |
+| TEST-051 | Upload securite | P1 | M | - |
+| TEST-052 | HTTPS/Headers | P1 | S | - |
+
 ### Sprint 5 : Infrastructure (P0-P1)
 
 | ID | Tâche | Priorité | Complexité | Assigné |
@@ -170,18 +236,28 @@ Ce kanban est pré-rempli avec toutes les tâches des fichiers `equipe-*.md`. Me
 
 | Métrique | Valeur |
 |---|---|
-| **Total tâches** | 89 |
-| **P0 (MVP)** | 48 |
-| **P1 (Important)** | 30 |
-| **P2 (Souhaitable)** | 11 |
-| **Estimation P0** | ~136h |
-| **Estimation P0+P1** | ~200h |
-| **BACKLOG** | 89 |
+| **Total tâches** | 141 |
+| **P0 (MVP)** | 75 |
+| **P1 (Important)** | 54 |
+| **P2 (Souhaitable)** | 12 |
+| **Estimation P0** | ~200h |
+| **Estimation P0+P1** | ~332h |
+| **BACKLOG** | 141 |
 | **TODO** | 0 |
 | **EN COURS** | 0 |
 | **REVIEW** | 0 |
 | **FAIT** | 0 |
 | **Progression** | 0% |
+
+### Repartition par equipe
+
+| Equipe | Tâches | Estimation |
+|---|---|---|
+| Backend | 30 | ~82h |
+| Frontend | 38 | ~98h |
+| Infrastructure | 21 | ~54h |
+| Securite | 69 points d'audit | - |
+| **Tests** | **52** | **~132h** |
 
 ---
 
@@ -194,3 +270,5 @@ Ce kanban est pré-rempli avec toutes les tâches des fichiers `equipe-*.md`. Me
 | Sprint 3 | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] |
 | Sprint 4 | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] |
 | Sprint 5 | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] |
+| Sprint 6 | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] |
+| Sprint 7 | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] | [A REMPLIR] |
